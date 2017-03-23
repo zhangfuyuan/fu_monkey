@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>重要的html标签及其属性</title>
+ </head>
+ <body>
+
+	<!-- img图片 -->
+	<img src="路径" alt="替代文本，当图片不能显示的时候，显示这里的文字" title="鼠标移至图片位置所显示的文字" />
+
+	<!-- a标签，超级链接 -->
+	<a href="网址" title="悬停文本" target="_blank">超级链接文字,跳转至新页面</a>
+
+	<!-- 页面内的锚点，用name属性或者id属性 -->
+	<a name="grjj"></a>
+	<a href="#grjj"></a><!--注意需要#-->
+
+	<!-- <ul> + <li> 无序列表 -->
+		<ul>
+		<li>
+			吃的
+				<ul>
+					<li>饼干</li>
+					<li>面包</li>
+					<li>
+						巧克力
+						<ul>
+							<li>德芙</li>
+							<li>费列罗</li>
+						</ul>
+					</li>
+				</ul>
+		</li>
+		<li>
+			用的
+			<ul>
+				<li>笔记本</li>
+				<li>圆珠笔</li>
+				</ul>
+			</li>
+			<li>
+				喝的
+				<ul>
+					<li>牛奶</li>
+					<li>可乐</li>
+				</ul>
+			</li>
+		</ul>
+
+	<!-- <dl> + <dt> + <dd> 定义列表 -->
+		<dl>
+		<dt>购物指南</dt>
+		<dd>
+			<a href="#">购物流程</a>
+			<a href="#">会员介绍</a>
+			<a href="#">生活旅行/团购</a>
+			<a href="#">常见问题</a>
+			<a href="#">大家电</a>
+			<a href="#">联系客服</a>
+			</dd>
+		</dl>
+		<dl>
+			<dt>配送方式</dt>
+			<dd>
+				<a href="#">上门自提</a>
+				<a href="#">211限时达</a>
+				<a href="#">配送服务查询</a>
+				<a href="#">配送费收取标准</a>
+				<a href="#">海外配送</a>
+			</dd>
+		</dl>
+
+	<!-- <form> 表单 -->
+	<form action="1.php" method="post/get">
+		文本框:<input type="text" value="默认有的值" placeholder="提示语" style="width: 73px;"></input>
+		密码框:<input type="password" />
+		单选按钮:<input type="radio" name="sex" checked="checked"> <!--默认被选择-->
+				 <input type="radio" name="sex" id="man" /> <label for="man">男</label><!--文本绑定标签-->
+		复选框:<input type="checkbox" />
+		下拉列表:	<select>
+					<option value="1">北京</option>
+					<option>河北</option>
+					<option>河南</option>
+					<option>山东</option>
+					<option>山西</option>
+					<option>湖北</option>
+					<option>安徽</option>
+					</select>
+		多行文本框（文本域）:<textarea cols="30" rows="10"></textarea>
+		浏览本地文件：<INPUT TYPE="file" style="display:none" id="myfile"><!--style="display:none"隐藏按钮-->
+		普通按钮：<input type="button" value="我是一个普通按钮" onclick='document.getElementById("myfile").click()'/>
+		提交按钮：<input type="submit" value="提交" />
+		重置按钮：<input type="reset" value="重置"/>
+	</form>
+
+	<!-- 字符实体 -->
+	&lt; : <  
+	&gt; : >
+	&copy; : ©  版权符号
+	&nbsp; : 空格
+
+	<!-- <table> 表格 -->
+	<table border="1" width="500px" height="300px" rules="all" cellspacing="0" ><!--rules="all"或cellspacing="0"去除边框间隙-->
+		<thead><!--规范表格需表头和tbody--> 
+			<tr>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+
+		<tbody>
+				<!--行-->
+			<tr>
+				<!--单元格-->
+				<!--colspan="3"合并三列，并需删除两列-->
+				<td align="center" colspan="3" bgcolor="#ADFF2F">水果</td>
+			</tr>
+				<!--行-->
+			<tr>
+				<!--单元格-->
+				<!--rowspan="2"合并两行，并需删除1行-->
+				<td rowspan="2"></td>
+				<td></td>
+				<td></td>
+			</tr>
+				<!--行-->
+			<tr>
+				<!--单元格-->
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+
+
+ </body>
+</html>

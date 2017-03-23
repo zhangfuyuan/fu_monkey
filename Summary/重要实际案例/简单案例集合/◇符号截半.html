@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+
+<style>
+	s,i {
+		font-style: normal;
+		text-decoration: none;
+	}
+
+	.fl {
+		float: left;
+	}
+	
+	i {
+    /*行内元素需要转换成块状元素，才能设置宽高*/
+		display: block;
+
+		margin-top: 7px;
+
+		width: 15px;
+		height: 5px;
+		overflow: hidden;
+
+		/*让子元素根据它来定位*/
+		position: relative;
+
+		/*border: 1px solid red;*/
+	}
+
+	i s {
+		/*设置绝对定位，让子元素的高度，对父元素的高度没有影响*/
+		position: absolute;
+		left: 0;
+		top: -10px;
+
+		width: 10px;
+		height: 10px;
+	}
+</style>
+
+ </head>
+ <body>
+  
+  <span class="fl">
+                送至：广州
+            </span>
+
+            <!--要有两个方块, i 斜体， s 是加粗
+                通过这两个标签设置样式，让菱形变成三角形
+            -->
+            <i class="fl"><s>◇</s></i>
+
+ </body>
+</html>

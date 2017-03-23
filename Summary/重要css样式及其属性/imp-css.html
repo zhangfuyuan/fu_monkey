@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>重要的css样式及其属性</title>
+
+
+<style>
+	/* * 代表匹配页面上【所有的】 节点，称为通配符*/
+	* {
+		color:red;		/*字符颜色；红橙黄绿青蓝紫：red, orange, yellow, green, cyan, blue, purple; 天蓝色：skyblue; 黑白色：black, white; 粉红色：pink; 灰色：gray */
+		color: red !important;		/*!important 可以用来提升属性的权值，前提一致下最大的；注意： important 只能提升1个属性的权值，并不能提升整个样式的权值，如果有多个样式需要提升权值，必须在样式后，都加 important*/
+
+		background-color: blue;		
+		background-color: rgb(255, 0, 0);
+		background-color: #ff0000;		/*背景颜色*/
+
+		font: 30px/60px "微软雅黑";		/*字体三大属性：大小、行高（可用%写）和字样*/
+		font-size:40px;		/*字号大小*/
+		font-weight: bold;		/*加粗*/
+		font-weight: normal;		/*不加粗*/
+		font-style: italic;		/*斜体*/
+		font-style: normal;		/*不斜体*/
+		font-family:"隶书";		/*字体样式*/
+		letter-spacing: 10px; /* 设置字符间距，默认normol */
+
+		text-decoration: underline;		/*下划线*/
+		text-decoration: none;		/*没有下划线*/
+		text-indent: 2em;		/*首行空两个汉字的格*/
+		text-align: center;		/*文本居中*/
+
+		line-height: 46px;		/*行高，当这个高度和容器的高度一致的时候，里面的文字就会垂直居中*/
+		/*仅以上四种含color、font-、text-、line-样式才可以继承，下面的均不可！*/
+
+		box-shadow: 10px 10px 5px #888888;		/*右下阴影效果*/
+		
+		border-bottom: 1px solid red;		
+		border-style:solid dashed;
+		border-right-color:blue;
+		border-left-width:10px;		/*底边框属性， dotted-点线， dashed-虚线， double-双线， groove-开线， outset-凸线；左右上下：left, right, top, bottom*/
+		border-left: none;		/*没有左边框*/
+		border-left-width: 0;		/*整左边边框的宽度为0*/
+
+		display: inline-block;		/*应用此特性的元素呈现为内联对象，周围元素保持在同一行，但可以设置宽度和高度地块元素的属性（即行内方块）*/
+		display: none;		/*相当于隐藏元素*/
+		
+		outline:none;		/*按钮或文本框默认的外边框隐藏*/
+	
+		overflow: hidden;		/*将超出盒子以外的部分，截取掉——1.当子节点设置了浮动的时候，不会设置父元素的高度。这时，可以通过 overflow 来撑开父节点的高度；2.清除浮动*/
+		overflow: scroll;		/*	无论是否部分超出盒子，均显示滑动条 */
+		overflow: auto;		/*	部分超出盒子，才显示滑动条 */
+		
+		/*去掉空白间隙*/
+		margin: 0;
+		padding: 0;
+
+		background-size: 80%;		/*设置背景图片大小*/
+		background-color: rgba(0, 0, 0, 0.5);		/*rgba  第4个参数代表透明度： 0.5 代表透明度为 50% */
+		background-image: url(images/gamepic1.jpg);			/*设置背景图片*/
+		background-repeat: repeat-x;		/* 设置背景图片是否水平重复平铺；no-repeat 代表横纵都不重复， repeat-x 代表 水平方向(x) 重复， repeat-y 代表 纵方向(y) 重复， repeat 代表双向重复 */
+		background-position: -50px -50px;		/* background-position 设置图片的位置，分别代表 x 方向移动的距离  和 y 方向代表移动的距离，正数代表 往右下脚移动，负数代表 往左上脚移动 */
+		background-position: center center;		/* 图片居中；可以用英文单词， right bottom 代表右下脚*/
+		background: url(images/taobao.png) no-repeat -149px -118px;/*三个属性可以合在一起写，简写方式；结合设置宽高实现精灵图片（即裁剪加载的发生位移了的图片）*/
+		background-attachment: fixed;		/*设置背景图片不随滚动条滚动而滚动，也就是说图片不动*/
+		background: #FBB91A url(images/1.jpg) repeat center center fixed;		/*颜色、图片、重复、位置、附加属性，都可以写在一行中*/
+
+		position: relative;		/*相对定位: 保留盒子原本的位置不动，可以通过 left, top 的值对它的位置进行调整；如果没有设置 position 的属性值，那么position的值是用默认值 : static 文档流布局不能设置 left 和 top；设置距离左边100px，距离上边100px：left: 100px; top: 100px; */
+		position: absolute;		/*绝对定位 会一层一层往上面找，以第一个设置了定位方式的 为参考点；会让方块脱离标准流； 居中步骤：1.距离也可以用 百分比—— left: 50%; top: 0; 2.再往左边跑 宽度的一半，使元素居中—— margin-left: -50px; 绝对定位下，左右auto会失效的，所以不能采用这种方式居中 */
+		position: fixed;		/* fixed 代表固定定位，定位的元素不会随着滚动条滚动而滚动；固定定位，也会使元素 脱标 (3种方式： 浮动，固定定位，绝对定位) */
+		/* 注意：以上三种位置设定均通过 left, top, right, bottom 的值对它的位置进行调整，但参考点都不一样；relative—— 相对于原来位置（滚页会变化）； absolute—— 相对于首页面的四角原点（滚页会变化）；fixed—— 相对于显示屏容纳的页面（滚页不会变化）*/
+
+		z-index: 0;		/*z-index 设置层叠关系， 数值越大，就越靠近上面；默认值为0，也就是说如果没有设置那么就是0；从父现象，即使儿子数字再高，与父辈相同并css写在后面或比父辈高的样式均覆盖其儿子 */
+
+		opacity: 0.5;		/*设置当前方块的透明度*/
+		filter: alpha(opacity=50);		/* IE中的透明度写法*/
+
+		vertical-align: middle;		/* 解决图片有3像素的bug问题，设置图片在垂直方向居中 */
+
+
+	}
+
+	.spec {
+	  clear: both;		/*清除浮动*/
+	}
+
+	/*伪类消浮的两种方法*/
+	/*1.单伪类元素
+		在clearfix后面添加一个元素
+		支持 chrome，firefox, 但在 iE7/IE6不支持	
+	*/
+	.clearfix:after {	
+		content: "";		/*添加的元素，必须配置内容的这个属性*/	
+		display: block;		/*告诉浏览器，我当前加的是一个块状元素*/
+		height: 0;
+		visibility: hidden;		visibility: hidden;
+		clear: both;		/*清除浮动*/
+	}		
+	.clearfix {
+		*zoom: 1;
+	}
+	/*可以在 IE6/IE7 下触发 BFC，所以能达到清除浮动的效果
+		zoom: 代表缩放级别
+		1: 1:1 的比例。 因为我们是清除浮动，所以建议比例都采用1
+
+		zoom 前面的*代表，匹配任何前缀 ，例如可以匹配 firefox-zoom, ie-zoom （这是随意些的）
+	*/
+
+	/*2.单伪类元素(闭合浮动法)*/
+	.clearfix:before, .clear:after {
+		display: table;
+		content: "";
+	}
+	.clearfix:after {
+		clear: both;
+	}
+	.clearfix {
+		*zoom: 1;
+	}
+	table {
+		border-collapse:collapse;		/* 单线框表格 */
+	}
+
+	/*所有标签都是盒模型，其中属于块状元素的五大基本属性*/
+	div {
+		display: inline;		/*设置为行内元素后不可以设置宽、高*/
+		width: 200px;
+		height: 200px;
+		padding: 0px;
+		margin: 0px;		/*善于使用父亲的padding，而不是儿子的margin*/
+		border: 10px solid red;
+		margin: 0 auto;		/*盒子居中,必须有width*/
+	}
+
+	/*行内元素是不可以设置宽、高的*/
+	span {
+		display: block;		/*转换成块状元素后可以设置宽、高*/
+		float: left;		/*行内元素，经过浮动设置后，就可以支持宽、高的设置了;浮动宏观的看，就是做“并排”的。有几个性质：脱标、贴边、字围、收缩。*/
+		/*width: 200px;
+		height: 50px;*/
+		padding: 0px;
+		margin: 0px;
+		border: 1px solid yellow;
+	}
+
+/*****
+ *****		
+ 横排导航条应用<ul>和<a>标签样式的标准流程
+ *****	
+ ****/
+
+	.nav {
+		margin: 0 auto;
+		width: 900px;
+		border: 1px solid red;
+		overflow: hidden;
+	}
+		
+	.nav ul {
+		list-style: none;		/*去掉 ul的 小点*/
+		/*去掉空白间隙*/
+		margin: 0;
+		padding: 0;
+	}
+
+	.nav ul li {
+		float: left;		/*横排nav*/
+		width: 150px;
+		height: 40px;
+		line-height: 40px;
+		background-color: purple;
+		text-align: center;
+	}
+
+	.nav a {		/* 写成 .nav a:link, a:visited, a:active {} 也可 */
+		display: block;		/*转换成块状元素*/
+		background: yellowgreen;
+		border: 1px solid red;
+		width: 150px; 
+		height: 40px;
+		color: white;
+		text-decoration: none;
+		font-size: 15px;
+	}
+
+	/*鼠标移上去的颜色*/
+	.nav a:hover {
+		color: blue;
+		background-color: orange; /*橘红色*/
+	}
+
+
+			/*选择器种类*/
+
+	/*.修饰一类选择器，可共性，可个性*/
+	.background{
+		background: pink;/*背景颜色*/
+	}
+
+	/*后代选择器， 代表 类名为 special 节点下面【所有】的 p 节点*/
+	.special p {
+		color: red;
+	}
+
+	/*交集选择器， 只选择 h3 的带 special 样式的节点的带 zhongyao 样式的节点；不建议，一般交集是用于 标签+样式*/
+	h3.special.zhongyao {
+		font-size: 30px;
+	}
+
+	/*, 逗号分割的是代表选择所有的节点，两者是并且的关系*/
+	.c1, .c2 {
+		text-decoration: underline;
+	}
+
+	/*儿子选择器，div下面的第一层节点中的 p*/
+	div>p {
+		color: red;
+	}
+
+	/*序选择器，在选择节点中的第一个*/
+	ul li:nth-child(1) {
+		color: red;
+	}
+	ul li:first-child {
+		color: red;
+	}
+
+	/*兄弟选择器，紧挨着h3的p节点（兄弟节点）*/
+	h3+p {
+		color: red;
+	}
+	
+
+/*
+****
+		外联全局样式模板（京东模板）
+****
+*/
+	@charset "UTF-8";
+	/*css 初始化 */
+	html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img {
+		margin: 0; 
+		padding: 0; 
+	}
+
+	fieldset, img,input,button { 
+		border: none; 
+		padding: 0;
+		margin: 0;
+		outline-style: none; 
+	}
+
+	ul, ol { 
+		list-style: none; 
+	}
+
+	input { 
+		padding-top: 0; 
+		padding-bottom: 0; 
+		font-family: "SimSun","宋体";
+	}
+
+	select, input { 
+		vertical-align: middle; 
+	}
+	select, input, textarea { 
+		font-size: 12px; 
+		margin: 0; 
+	}
+
+	textarea { 
+		resize: none;	/*防止拖动*/
+	} 
+
+	img {
+		border: 0; 
+		vertical-align: middle;			/*  去掉图片低测默认的3像素空白缝隙*/
+	}  
+
+	table { 
+		border-collapse: collapse; 
+	}
+
+	body {
+		font: 12px/150% Arial,Verdana,"\5b8b\4f53";
+		color: #666;
+		background: #fff
+	}
+
+	.clearfix:before,.clearfix:after {
+		content: "";
+		display: table;
+	}
+
+	.clearfix:after {
+		clear: both;
+	}
+
+	.clearfix{
+		*zoom: 1;		/*IE/7/6*/
+	}
+
+	a {
+		color: #666; 
+		text-decoration: none; 
+	}
+
+	a:hover {
+		color: #C81623;
+	}
+
+	h1,h2,h3,h4,h5,h6 {
+		text-decoration: none;
+		font-weight: normal;
+		font-size: 100%;
+	}
+
+	s,i,em {
+		font-style: normal;
+		text-decoration: none;
+	}
+
+	.col-red {
+		color: #C81623 !important;
+	}
+
+	/*公共类*/		/*版心 提取 */
+	.w {  
+		width: 1210px;
+		margin: 0 auto;
+	}
+	.fl {
+		float: left;
+	}
+	.fr {
+		float: right;
+	}
+	.al {
+		text-align: left;
+	}
+	.ac {
+		text-align: center;
+	}
+	.ar {
+		text-align: right;
+	}
+	.hide {
+		display: none;
+	}
+
+
+</style>
+
+
+<!-- 外链式 最常用的
+	rel="stylesheet" 说明是 层叠样式文件，不能省略
+
+	type="text/css"  可写可不写
+
+
+	href=“路径”     
+		相对路径 一般用这个
+		绝对路径   必须是 http://，   /，  d:/， file://
+
+
+		/css/1.css     绝对路径    服务器根目录 / css 文件夹下的 / 1.css
+		1/2/3/4.css    相对路径    相当于当前文件，当前文件夹 1 / 2 / 3/ 4.css
+									文件夹的名字是可以是数字的
+-->
+<link rel="stylesheet" href="1-css.css" type="text/css"> </link>
+
+
+ </head>
+ <body>
+  
+	<!--内墙法清除浮动-->
+    <div>
+		<ul>
+			<li>HTML</li>
+			<li>CSS</li>
+			<li>JS</li>
+			<li>HTML5</li>
+			<li>设计模式</li>
+		</ul>
+		<div class="spec"> </div>
+	</div>
+	<div>
+		<ul>
+			<li>学习方法</li>
+			<li>英语水平</li>
+			<li>面试技巧</li>
+		</ul>
+	</div>
+
+ </body>
+</html>

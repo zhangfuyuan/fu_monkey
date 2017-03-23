@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>home1</title>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			
+			.box{
+				width: 600px;
+				height: 700px;
+				margin: 100px auto;
+				box-shadow: 10px 10px 5px #888888;
+			}
+			
+			.box h2{
+				height: 50px;
+				color: red;
+				text-align: center;
+				border-bottom: 1px solid red;
+			}
+			
+			.box form table{
+				width: 600px;
+				height: 600px;			
+			}
+			
+			table tr td .data{
+				width: 50px;
+			}
+			
+			table tr td textarea{
+				width: 350px;
+				height: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<h2>会员注册</h2>
+			<form action="">
+				<table>
+					<tr>
+						<td>
+							<label for="userName">用户名：</label>
+						</td>
+						<td>
+							<input type="text" name="userName" id="userName" placeholder="请输入用户名" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label for="userPaw">密码：</label>
+						</td>
+						<td>
+							<input type="password" name="userPaw" id="userPaw" placeholder="请输入密码" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label for="sex">性别：</label>
+						</td>
+						<td>
+							<input type="radio" name="sex" id="nan" checked="checked"/>
+							<label for="nan">男&nbsp;&nbsp;&nbsp;&nbsp;</label>
+							<input type="radio" name="sex" id="nv"/>
+							<label for="nv">女</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label for="Data">出生年月：</label>
+						</td>
+						<td>
+							<input type="text" name="number" class="data" />
+							<span>年</span>
+							<select>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+								<option>6</option>
+								<option>7</option>
+								<option>8</option>
+								<option>9</option>
+								<option>10</option>
+								<option>11</option>
+								<option>12</option>
+							</select>
+							<span>月</span>
+							<select>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+								<option>6</option>
+								<option>7</option>
+								<option>8</option>
+								<option>9</option>
+								<option>10</option>
+								<option>11</option>
+								<option>12</option>
+								<option>13</option>
+								<option>14</option>
+								<option>15</option>
+								<option>16</option>
+								<option>17</option>
+								<option>18</option>
+								<option>19</option>
+								<option>20</option>
+								<option>21</option>
+								<option>22</option>
+								<option>23</option>
+								<option>24</option>
+								<option>25</option>
+								<option>26</option>
+								<option>27</option>
+								<option>28</option>
+								<option>29</option>
+								<option>30</option>
+								<option>31</option>
+							</select>
+							<span>日</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label for="dizhi">地址：</label>
+						</td>
+						<td>
+							<input type="text" name="dizhi" id="dizhi" placeholder="请输入地址" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label for="hobby">请选择您的爱好:</label>
+						</td>
+						<td>
+							<input type="checkbox" name="hobby1" id="hobby1"/>
+							<label for="hobby1">体育&nbsp;&nbsp;</label>
+							<input type="checkbox" name="hobby2" id="hobby2"/>
+							<label for="hobby2">旅游&nbsp;&nbsp;</label>
+							<input type="checkbox" name="hobby3" id="hobby3"/>
+							<label for="hobby3">读书&nbsp;&nbsp;</label>
+							<input type="checkbox" name="hobby4" id="hobby4"/>
+							<label for="hobby4">电脑&nbsp;&nbsp;</label>
+							<input type="checkbox" name="hobby5" id="hobby5"/>
+							<label for="hobby5">电脑&nbsp;&nbsp;</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label for="xingxiang">上传形象：</label>
+						</td>
+						<td>
+							<input type="text" name="xingxiang" />
+							<input type="file" style="width: 73px;">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label for="jieshao">个人介绍:</label>
+						</td>
+						<td>
+							<textarea></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label for="lianjie">友情链接:</label>
+						</td>
+						<td>
+							<select>
+								<option>网易</option>
+								<option>百度</option>
+								<option>腾讯</option>
+								<option>新浪</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center">
+							<input type="submit" value="提 交" />
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="reset" value="重 置" />
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</body>
+</html>

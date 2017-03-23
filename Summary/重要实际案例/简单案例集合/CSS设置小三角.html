@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+      <style>
+        .div1{
+            background: red;
+            width: 100px;
+            height: 100px;
+            position: relative;
+        }
+        .div1:after{
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            left: 50%;
+            margin-left: -10px;
+            content: " ";
+            border-bottom: 10px solid  #000000 ;
+            border-left: 10px solid transparent ;
+            border-right: 10px solid transparent ;
+ 
+        }
+        .div1:before{
+            position: absolute;
+            top: -10px;
+            width: 0;
+            height: 0;
+            left: 50%;
+            margin-left: -10px;
+            content: " ";
+            border-bottom: 10px solid  #000000 ;
+            border-left: 10px solid transparent ;
+            border-right: 10px solid transparent ;
+        }
+    </style> 
+ </head>
+ <body>
+  
+  <div class="div1">
+
+</div>
+ </body>
+</html>
