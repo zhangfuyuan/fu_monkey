@@ -75,7 +75,7 @@
 
 		z-index: 0;		/*z-index 设置层叠关系， 数值越大，就越靠近上面；默认值为0，也就是说如果没有设置那么就是0；从父现象，即使儿子数字再高，与父辈相同并css写在后面或比父辈高的样式均覆盖其儿子 */
 
-		opacity: 0.5;		/*设置当前方块的透明度*/
+		opacity: 0.5;		/*设置当前方块的透明度,规范：省略0写成 .5 */
 		filter: alpha(opacity=50);		/* IE中的透明度写法*/
 
 		vertical-align: middle;		/* 解决图片有3像素的bug问题，设置图片在垂直方向居中 */
@@ -133,7 +133,8 @@
 		padding: 0px;
 		margin: 0px;		/*善于使用父亲的padding，而不是儿子的margin*/
 		border: 10px solid red;
-		margin: 0 auto;		/*盒子居中,必须有width*/
+		margin: 0 auto;		/*盒子居中,必须有width*/		
+		border-radius: 20px 20px 20px 0;		/*用于设置角的幅度;左上、右上、右下、左下：顺时针方向*/
 	}
 
 	/*行内元素是不可以设置宽、高的*/
