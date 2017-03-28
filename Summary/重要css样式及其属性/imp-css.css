@@ -69,7 +69,7 @@
 		background: #FBB91A url(images/1.jpg) repeat center center fixed;		/*颜色、图片、重复、位置、附加属性，都可以写在一行中*/
 
 		position: relative;		/*相对定位: 保留盒子原本的位置不动，可以通过 left, top 的值对它的位置进行调整；如果没有设置 position 的属性值，那么position的值是用默认值 : static 文档流布局不能设置 left 和 top；设置距离左边100px，距离上边100px：left: 100px; top: 100px; */
-		position: absolute;		/*绝对定位 会一层一层往上面找，以第一个设置了定位方式的 为参考点；会让方块脱离标准流； 居中步骤：1.距离也可以用 百分比—— left: 50%; top: 0; 2.再往左边跑 宽度的一半，使元素居中—— margin-left: -50px; 绝对定位下，左右auto会失效的，所以不能采用这种方式居中 */
+		position: absolute;		/*绝对定位 会一层一层往上面找，以第一个设置了定位方式的 为参考点；会让方块脱离标准流； 居中步骤：1.距离也可以用 百分比—— left: 50%; top: 0; 2.再往左边跑 宽度的一半，使元素居中—— margin-left: -50px; 绝对定位下，左右auto会失效的，所以不能采用这种方式居中; 注意：绝对定位之后，不需要 display:block; （无论是否块状元素）就可以设置宽、高了。 */
 		position: fixed;		/* fixed 代表固定定位，定位的元素不会随着滚动条滚动而滚动；固定定位，也会使元素 脱标 (3种方式： 浮动，固定定位，绝对定位) */
 		/* 注意：以上三种位置设定均通过 left, top, right, bottom 的值对它的位置进行调整，但参考点都不一样；relative—— 相对于原来位置（滚页会变化）； absolute—— 相对于首页面的四角原点（滚页会变化）；fixed—— 相对于显示屏容纳的页面（滚页不会变化）*/
 
@@ -81,6 +81,12 @@
 		vertical-align: middle;		/* 解决图片有3像素的bug问题，设置图片在垂直方向居中 */
 
 		cursor: pointer;		/*设置鼠标手势； move: 移动手势 */
+
+		border-radius: 50%;		/* 画圆；盒子边框变圆形*/
+
+		white-space: nowrap;		/*禁止文本自动换行*/
+		text-overflow: ellipsis;		/*超出文本省略号处理*/
+		/* 以上两个属性结合 overflow: hidden; 一起使用可以使文本在规定空间内省略溢出文本*/
 
 	}
 
