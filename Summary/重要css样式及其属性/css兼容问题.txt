@@ -1,0 +1,19 @@
+问题一、图片过渡动画时间设置：
+transition: 0.5s;
+-webkit-transition: 0.5s; 
+-moz-transform: 0.5s;
+
+
+问题二、*通配符的识别问题：
+1. IE都能识别* ; 标准浏览器(如FF)不能识别*；
+2. IE6能识别*，但不能识别 !important; IE6在样式前面加_
+3. IE7能识别*，也能识别!important;
+4. IE8能识别\ 9 例如：background:red \9;
+5. firefox不能识别*，但能识别!important;
+
+
+问题三、不同样式文件的处理：
+兼容ie浏览器的样式单独用文件写，并引入
+<!--[if IE]-->
+	<link rel="stylesheet" href="style_ie.css" type="text/css" />
+<!--[endif]-->

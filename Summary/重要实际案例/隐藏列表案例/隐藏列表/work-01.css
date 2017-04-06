@@ -1,0 +1,36 @@
+@charset "UTF-8";
+* {
+    padding: 0;
+    margin: 0;
+}
+.box {
+    width: 240px;
+    height: 40px;
+    border: 1px solid red;
+    margin: 100px auto;
+}
+.box ul {
+    list-style: none;
+    position: relative;
+}
+.box ul li{
+    width: 60px;
+    height: 40px;
+    float: left;
+}
+.til {
+    width: 60px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+.con {
+    width: 240px;
+    height: 100px;
+    background: green;
+    position: absolute;
+    left: 0;
+    text-align: center;
+    line-height: 100px;
+    display: none;
+}

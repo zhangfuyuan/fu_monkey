@@ -1,0 +1,28 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+}
+div {
+    width: 200px;
+    margin: 200px auto 0;
+    text-align: center;
+}
+#num1,#num2,#num3 {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: pink;
+    color: #333;
+    border-radius: 50%;     /*画圆*/
+    text-align: center;
+    line-height: 30px;
+}
+p {
+    width: 400px;
+    margin: 20px auto 0;
+    text-align: center;
+}
+#start,#stop,#restart {
+    width: 100px;
+}

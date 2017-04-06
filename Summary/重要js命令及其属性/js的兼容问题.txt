@@ -1,0 +1,24 @@
+问题一、IE事件处理程序：（IE8.0及以下版本）
+attachEvent      表示的是添加一个事件；
+detachEvent     表示的是移除一个事件；
+（ps：在attachEvent()方法中，第一个参数是事件名，它与addEventListener()方法是有区别的，要在事件名称前加一个on；其他参数一样）
+
+
+问题二、浏览器对于DOM0级与DOM2级事件处理分歧：
+var oBtn = document.getElementById('btn');
+		if(oBtn.addEventListener){
+			oBtn.addEventListener('click',fun1);
+		}else if(oBtn.attachEvent){
+			oBtn.attachEvent('onclick',fun1);
+		}else{
+			oBtn.onclick = fun1();
+		};
+		function fun1(){
+			alert('哈哈，随便哪个浏览器，都可以看到我啦！');
+		}
+
+
+问题三、获取当前页面最底部距离整个可滚动页面最顶部的距离：
+var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;;
+var pageHeight = document.documentElement.clientHeight||document.body.clientHeight;
+var distance = scrollTop+pageHeight;

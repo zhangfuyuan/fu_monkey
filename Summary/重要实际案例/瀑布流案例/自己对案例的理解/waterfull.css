@@ -1,0 +1,23 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+}
+#container {
+    position: relative;
+}
+.box {
+    padding: 5px;
+    float: left;
+    box-shadow: 0 5px 5px #ccc;
+}
+.imgBox {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 0 0 5px #ccc;
+}
+.imgBox img{
+    width: 200px;
+    height: auto;
+}
