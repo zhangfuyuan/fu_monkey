@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+#container {
+    width: 65px;
+    height: 500px;
+    position: fixed;
+    right: 100px;
+    top: 100px;
+}
+
+#container ul {
+    list-style: none;
+}
+
+#container ul li {
+
+}
+
+#container ul li a{
+    display: block;
+    width: 34px;
+    height: 44px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 40px;
+    font-size: 14px;
+    padding: 6px 8px 0;
+    color: white;
+    position: relative;
+}
+
+#container ul li:nth-child(1) a {
+    line-height: 17px;
+    font-size: 14px;
+    background-color: #FF4200;
+}
+
+#container ul li:nth-child(2) a {
+    color: #FF0055;
+}
+
+#container ul li:nth-child(3) a {
+    color: #8D7AFB;
+}
+
+#container ul li:nth-child(4) a {
+    color: #A8C001;
+}
+
+#container ul li:nth-child(5) a {
+    color: #A2745B;
+}
+
+#container ul li:nth-child(6) a {
+    line-height: 17px;
+    font-size: 14px;
+    color: #FF4400;
+}
+
+#container ul li:nth-child(7) a {
+    color: #3C3C3C;
+}
+
+#container ul li:nth-child(8) a{
+    line-height: 17px;
+    font-size: 14px;
+    color: #3C3C3C;
+}
+
+#container ul li a:after{
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    width: 34px;
+    left: 8px;
+    border-bottom: 1px solid #efefef;
+
+}
+
+#container ul li:first-child a:after,#container ul li:last-child a:after {
+    border-bottom: 0;
+}
+
+
+

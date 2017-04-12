@@ -20,22 +20,23 @@ window.onload = function() {
 	//事件流中，默认为事件冒泡，即先执行最具体的元素的事件，然后再向上逐级传播。
 
 	//JS中，对象的层次关系：（最高级：浏览器对象）
-	browser{window[frame,document(Document,Element,Attribute,Event),location,history,screen],navigator}
+	browser{window[frame,document(Document,Element,Attribute,Event),location,history],screen,navigator}
 
 /************************		二、JS可直接调用的属性		************************/
 //BOM对象的属性（全局变量和document均可当作window对象的属性）
-	window.innerWidth;		//window对象的内部宽度
-	window.innerHeight;		//window对象的内部高度
+	window.innerWidth;		//window对象的内部宽度,包括滚动条的宽度（随缩放窗口变化）
+	window.innerHeight;		//window对象的内部高度，即浏览器中除去顶部浏览器自身的导航栏和可能底部检查框的高度后剩余显示内容的高度（随缩放窗口变化）
 	window.location.hostname;		//返回web主机的域名
 	window.location.pathname;		//返回当前页面的路径和文件名
 	window.location.port;		//返回web主机的端口
 	window.location.protocal;		//返回web所使用的协议（如http://或https://）
 	window.location.href;		//返回当前页面的URL
 	
-	screen.availWidth;		//可用屏幕的宽度
-	screen.availHeight;		//可用屏幕的高度
-	screen.width;		//屏幕的宽度
-	screen.height;		//屏幕的高度
+	//疑点：screen是不是window的子对象？？！
+	screen.availWidth;		//可用屏幕的宽度，一台电脑固定一个值（不随窗口变化）
+	screen.availHeight;		//可用屏幕的高度，即显示屏中除去桌面的任务栏的高度后剩余的高度，一台电脑固定一个值（不随窗口变化）
+	screen.width;		//屏幕的宽度，一台电脑固定一个值（不随窗口变化）
+	screen.height;		//屏幕的高度，一台电脑固定一个值（不随窗口变化）
 
 
 //DOM对象的属性（可为DOM对象的节点）
@@ -47,7 +48,8 @@ window.onload = function() {
 	document.*.parentNode;		//访问父节点（ps：唯一）
 	document.*.offsetHeight;		//*元素可见范围的不包含滚动条的高度
 	document.*.scrollHeight;		//*元素可见范围的包含滚动条的高度
-	document.documentElement.clientHeight;		//当前客户端浏览器的页面高度
+	document.documentElement.clientHeight;		//当前客户端浏览器的页面高度，即浏览器中除去顶部浏览器自身的导航栏和可能底部检查框的高度后剩余显示内容的高度（随缩放窗口变化）
+	document.documentElement.clientWidth;		//当前客户端浏览器的页面宽度，不包括滚动条的宽度（随缩放窗口变化）
 	document.documentElement.scrollTop;		//滚动条可见的顶部与整个页面最顶部的距离（ps：滚动条相当于当前页面的缩影）
 	document.*.offsetTop;		//*元素可见范围的顶部与整个页面最顶部的距离
 
@@ -104,7 +106,7 @@ window.onload = function() {
 	document.*.removeEventListener('事件名',函数名);		//移除侦听事件，其他的内容与addEventListener()方法一致
 	document.*.getAttribute('**');		//获取对象的**属性
 	document.*.setAttribute('**','***');		//设置对象的**属性的值改为***
-	document.*.setAttribute({src:'2.jpg',style:'border-radius:30%;'});		//组合改写属性
+	document.*.style.cssText = 'border-radius:30%;width:100px;height:100px;';		//组合改写属性
 	document.*.insertBefore(newVar,Var);		//在某个元素的前面插入一个新节点，在这个方法中，包含了两个参数，第一个参数是要插入的节点，第二个参数是参考节点，也就是所谓的在哪个节点前插入（ps：此两节点属同层节点）
 	document.*.removeChild(*.childNodes[1]);		//移除*的第二个子节点，结合childNodes属性理解
 
@@ -141,6 +143,7 @@ window.onload = function() {
 //数组的带参方法
 	arr1.concat(arr2).concat(arr3);		//合并三个数组
 	arr.push('*');		//末尾添加数组元素
+	arr.sort(num);		//数组数值升降序排列，正升负降
 
 
 /*2、不带参的方法*/
@@ -189,7 +192,6 @@ window.onload = function() {
 
 
 //数组的不带参方法
-	arr.sort();		//数组数值升序排列
 	arr.reverse();		//数组元素翻转
 
 

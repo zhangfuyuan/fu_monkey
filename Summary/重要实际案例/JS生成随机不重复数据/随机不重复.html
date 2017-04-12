@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+
+  
+	<!-- 最佳方法 -->
+<script type="text/javascript"> 
+
+var count=30; 
+var originalArray=new Array;//原数组 
+//给原数组originalArray赋值 
+for (var i=0;i<count;i++){ 
+	originalArray[i]=i+1; 
+} 
+var d1=new Date().getTime(); 
+
+//以下关键代码，“sort()”方法中的参数为“function(){ return 0.5 - Math.random(); }”则为随机排序
+originalArray.sort(function(){ return 0.5 - Math.random(); });		
+
+for (var i=0;i<count;i++){ 
+	document.write(originalArray[i]+" , "); 
+} 
+var d2=new Date().getTime(); 
+document.write("运算耗时"+(d2-d1)); 
+
+</script> 
+
+
+
+	<!-- 次佳方法 -->
+<!--
+<script type="text/javascript"> 
+/*
+var count=30; 
+var originalArray=new Array;//原数组 
+//给原数组originalArray赋值 
+for (var i=0;i<count;i++){ 
+	originalArray[i]=i+1; 
+} 
+var d1=new Date().getTime(); 
+for (var num,i=0;i<count;i++){ 
+
+//以下关键代码，随机输出一个值后，将这个值赋值null，这就能做到不重复输出同一个值
+	do{ 
+		num=Math.floor(Math.random()*count); 
+	}while(originalArray[num]==null); 
+
+	document.write(originalArray[num]+" , "); 
+	originalArray[num]=null; 
+} 
+var d2=new Date().getTime(); 
+document.write("运算耗时"+(d2-d1)); 
+*/
+</script> 
+-->
+
+ </head>
+ <body>
+  
+ </body>
+</html>
