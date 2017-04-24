@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>继承</title>
+</head>
+<body>
+
+</body>
+<script>
+    /* 1、继承的简单例子【普通继承特点：在继承后，打印子类的实例时，控制台没有打印出父类构造函数中的属性（即继承的属性）；但实际上子类已经继承了父类的属性！】 */
+    function People(eat,say) {      //父类（上级构造函数）
+        this.eat = eat;
+        this.say = say;
+    }
+    People.prototype.walk = '我会走';                   //父类原型属性赋值
+    function Student(play) {        //子类（下级构造函数）
+        this.play = play;
+    }
+    Student.prototype = new People('多吃饭','叫爸爸');        //【核心语句】实现父子类继承关系，并初始化父类属性（部分子类属性）;此时，Student的原型将被父类实例对象替代！
+    Student.prototype.pa = '我会爬';                           //父类实例对象属性赋值，此属性不属于子类！
+    var xiaoming = new Student('LOL');                        //初始化子类（独有属性）
+    console.log(xiaoming.play);
+    console.log(xiaoming.say);
+    console.log(xiaoming.walk);
+    console.log(xiaoming);                                              //指向子类实例对象，此时，只能打印出子类自身的属性，父类都不打印出来！
+    console.log(xiaoming.constructor);                                //指向父类（上级构造函数）【注意：constructor只能原型调用，若实例对象调用constructor，实则是这个实例对象的原型指向构造函数】
+    console.log(xiaoming.__proto__);                                    //指向子类原型对象 == 父类实例对象
+    console.log(xiaoming.__proto__.constructor);                      //指向父类（上级构造函数）
+    console.log(xiaoming.__proto__.__proto__);                          //指向父类原型对象 == People.prototype原型对象 == Object类实例对象
+    console.log(xiaoming.__proto__.__proto__.constructor);             //指向父类（上级构造函数）
+    console.log(xiaoming.__proto__.__proto__.__proto__);                //指向Object内置原型对象（终点）
+    console.log(xiaoming.__proto__.__proto__.__proto__.__proto__);      //null（无）
+    console.log('-------------------------------------------------------------------- 以上：继承的简单例子');
+
+
+    /* 2、继承的重写，子类会覆盖父类属性 */
+    function Student2(eat,play) {
+        this.eat = eat;
+        this.play = play;
+    }
+    Student2.prototype = new People('多吃饭','叫爸爸');
+    Student2.prototype.walk = '只会跑';		// 继承了父类，还可以覆盖重新
+    var xiaoming2 = new Student2('只吃肉','LOL');
+    console.log(xiaoming2);
+    console.log(xiaoming2.walk);
+    console.log('------------------------------------------------------------------------ 以上：继承的重写');
+
+
+    /* 3、借用式继承，子类获取父类属性和方法【借用式继承的特点是：可以传参，没有原型；与普通继承相比，子类可以打印出继承的属性，但不能调用父类的原型的属性】 */
+    function People1(name,age) {
+        this.name = name;
+        this.age = age;
+    }
+    People1.prototype.id = '000';
+    function Student1(name,age,sex) {
+        People1(name,sex);                           //此时，People1的this指代window
+        People1.apply(this,arguments);              //此时，劫持People1的this指代对象指向子类和获取People1属性，通过子类赋值，子类获取People1属性和方法；arguments 是内置的参数数组
+        //或者写成：People1.apply(this,[name,age]);
+        //再或者写成：People1.call(this,name,age);
+        //再再或者写成：this.constructor.apply(this,arguments); 但在构造函数外必须要有实现真正意义上继承关系的语句： Student1.prototype = new People1();
+        this.sex = sex;
+    }
+    var xiaohong = new Student1('小红',24,'女');
+    console.log('this指代window时: ' + window.name);
+    console.log(xiaohong);
+    console.log(xiaohong.name);
+	console.log(xiaohong.id);               // undefined --> 说明借用式继承的特点是：引用保持独立，可以传参，但没有原型，复用则无从谈起！【重点：可以传参，没有原型】
+    console.log(xiaohong.constructor);      //不同于第一个例子（“继承的简单例子”），此案例没有【Student1.prototype = new People1();】，所以借用式继承的特点是：引用保持独立，可以传参，但没有原型，复用则无从谈起！【重点：可以传参，没有原型】
+    console.log('------------------------------------------------------------------------ 以上：借用式继承');
+    
+
+	/* 4、混合继承【混合继承特点：子类既能调用父类的原型的属性，而且还能打印出继承的属性；注意：此时，子类的实例对象用constructor指向的实际上是父类的原型用constructor指向的父类构造函数】【具体关系看图《继承中的constructor指向分析.png》】*/
+	function People2(name,age) {
+        this.name = name;
+        this.age = age;
+    }
+    People2.prototype.id = '000';
+    function Student2(name,age,sex) {
+        this.constructor.apply(this,arguments); 
+		//或者写成：People2.apply(this,arguments);              
+        //再或者写成：People2.apply(this,[name,age]);
+        //再再或者写成：People2.call(this,name,age);
+        this.sex = sex;
+    }
+	Student2.prototype = new People2();		//【核心语句】实现真正意义上继承关系的语句
+    var xiaofang = new Student2('小方',18,'男');
+    console.log(xiaofang);					//可以打印出继承属性
+    console.log(xiaofang.id);				//可以调用父类的原型的属性
+    console.log(xiaofang.constructor);      //按照原型链查找机制，指向父类People2的原型的构造函数“function Peolpe2(){}”
+    console.log('------------------------------------------------------------------------- 以上：混合继承');
+    
+
+
+
+	
+
+</script>
+</html>

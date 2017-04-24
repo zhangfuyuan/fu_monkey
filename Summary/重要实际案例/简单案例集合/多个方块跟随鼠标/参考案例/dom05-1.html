@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		*{margin: 0;padding: 0;}
+		div{width: 20px;height: 20px;background: greenyellow;position:absolute;}
+	</style>
+	<body>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</body>
+	<script>
+		document.onmousemove=function() {
+			var e = event||arguments[0];
+			var list=document.getElementsByTagName("div");
+			var num=0;
+			var timer=setInterval(function() {
+				if (num==list.length) {
+					clearInterval(timer);
+					return;
+				} else{
+					list[num].style.left=e.clientX-10+"px";
+					list[num].style.top=e.clientY-10+"px";
+					num++;
+				}	
+			},200)
+			
+		}
+	</script>
+</html>

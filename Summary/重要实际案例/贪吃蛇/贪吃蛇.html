@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style>
+		body {
+		  width: 200px;
+		  margin: auto;
+		  font-size: 25px;
+		  text-align: center;
+		}
+		#c {
+		  border: 2px solid #d3d3d3;
+		  margin-top: 10px;
+		}
+	</style>
+	<body>
+		<canvas id="c" width="200" height="200"></canvas>
+		<p>用ASDW键控制</p >
+	</body>
+	<script>
+		var c  = document.getElementById('c'),
+			ctx = c.getContext('2d'),
+			w = 20, h = 20,  //定义区域20*20
+			pw = c.width / w, ph = c.height / h;  //一格的高度
+		var D = {97: {x: -1, y: 0}, 115: {x: 0, y: 1}, 100: {x: 1, y: 0}, 119: {x: 0, y: -1}}; // A:97, S:115, D:100, W:119
+		var pb = [{x: parseInt(w / 2, 10), y: parseInt(h / 2, 10), d: 119}],  //定义蛇的数组
+			pf = rndp();
+		window.addEventListener('keypress', function (e) {		//时间监听，keypress键盘按下事件
+			if (D[e.which]) {
+				pb[0].d = e.which;
+			} 
+		});
+		ctx.mdo = function (f, a) { //当调用canvas的方法时使用，a为方法参数
+			return ctx[f].apply(ctx, a), ctx; 
+		};
+		ctx.mset = function (f, v) { //当直接给canvas属性赋值时使用
+			return ctx[f] = v, ctx; 
+		};
+		function drawPoint (p, a, b, color) { 
+			ctx.mset('strokeStyle', '#fff').mdo('strokeRect', [p.x * pw, p.y * ph, pw, ph]).mset('fillStyle', color || '#aaa').mdo('fillRect', [p.x * pw, p.y * ph, pw, ph]);
+		};
+		function rndp () {    //食物初始化
+		  var p = {x: parseInt(Math.random() * w, 10), y: parseInt(Math.random() * h, 10)}; //食物坐标
+		  return pb.some(function (p2) { return p.x === p2.x && p.y === p2.y; }) ? rndp() : p;//判断是否为重复的 some（）方法用来筛选数组中每一个，遇到相同的重新生成
+		};
+		function gover () {
+			ctx.mset('fillStyle', '#e96900').mset('font', 'bold 24px 宋体').mdo('fillText', ['游戏结束', (c.width - 24 * 4) / 2, (c.height - 24) / 2]); 
+		};
+		function nxp (p) {
+		  var d = D[p.d];
+		  return {x: p.x + d.x, y: p.y + d.y, d: p.d}; //x：元素的x位置+下一x运动 y:元素y位置+下次y运动 d：蛇头运动的键盘数值
+		};
+		function gloop () {
+		  var hp = nxp(pb[0]); // 计算前进后蛇头的位置，如果不在屏幕区域内，或者与蛇身重合，则游戏结束
+		  if (!(hp.x >= 0 && hp.x < w && hp.y >= 0 && hp.y < h)){
+		  	return gover();
+		  };
+		
+		  for (var i = 0; i < pb.length; i++) {   //重合结束
+			if (hp.x === pb[i].x && hp.y === pb[i].y) {
+				return gover();
+			}
+		  };
+		  pb.unshift(hp); // 没有吃到食物，蛇头前进时，蛇尾要收缩
+		  (pf.x === hp.x && pf.y === hp.y) ? pf = rndp() : pb.pop();
+		  ctx.mset('fillStyle', '#f1fedd').mdo('fillRect', [0, 0, c.width, c.height]);//边框
+		  drawPoint(pf, 0, 0, '#e96900'); // 食物
+		  drawPoint(pb[0], 0, 0, '#2d64b3'); // 蛇头
+		  pb.slice(1).forEach(drawPoint); // 舍身   forEach（function（element, index, array））参数
+		  tid = setTimeout(gloop, 200 - pb.length * 1.5); // 自动加快速度
+		}
+		var tid = setTimeout(gloop, 200); //使用多次的单次计时器来进行无限运动
+	</script>
+</html>

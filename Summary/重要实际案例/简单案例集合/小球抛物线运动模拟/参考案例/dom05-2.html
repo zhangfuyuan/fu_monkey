@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		div{width: 50px;height: 50px;border-radius: 50%;background: red;position: absolute;}
+	</style>
+	<body>
+		<input type="button" value="开始运动" onclick="startMove()" />
+		<div></div>
+	</body>
+	<script>
+		function startMove() {
+			
+			var div=document.getElementsByTagName("div")[0];
+			var speedX=8;
+			var speedY=8;
+			setInterval(function() {
+				speedY+=2//给定垂直加速度
+				
+				var l=div.offsetLeft+speedX;//创建l变量保存左边距离
+				var t=div.offsetTop+speedY;//创建t变量保存上边距离
+				//判断运动边界
+				if (l>=document.documentElement.clientWidth-div.offsetWidth) {
+					speedX*=-0.8;//给反向速度
+					l=document.documentElement.clientWidth-div.offsetWidth
+				} else if(l<=0){
+					speedX*=-0.8;
+				}
+				if (t>= document.documentElement.clientHeight-div.offsetHeight) {
+					speedY*=-0.8;
+					speedX*=0.8;
+					t=document.documentElement.clientHeight-div.offsetHeight
+				}else if(t<=0){
+					speedY*=-0.8;
+					speedX*=0.8;
+					
+				}
+				//赋值
+				div.style.left=l+"px";
+				div.style.top=t+"px";
+			},20)
+		}
+	</script>
+</html>

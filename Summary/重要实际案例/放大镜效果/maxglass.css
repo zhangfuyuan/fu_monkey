@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+* {
+    padding: 0;
+    margin: 0;
+}
+.box {
+    width: 350px;
+    height: 350px;
+    border: 1px solid red;
+    background: url(xiaotu.jpg) no-repeat;
+    position: relative;
+    left: 100px;
+    top: 100px;
+}
+span {
+    /*display: block;*/
+    display: none;
+    width: 100px;
+    height: 100px;
+    background: orange;
+    opacity: .5;
+    position: absolute;
+    cursor: move;
+}
+.big {
+    display: none;
+    width: 230px;
+    height: 230px;
+    position: absolute;
+    left: 400px;
+    top: 0;
+    border: 1px solid red;
+    background: url(datu.jpg) no-repeat;
+}

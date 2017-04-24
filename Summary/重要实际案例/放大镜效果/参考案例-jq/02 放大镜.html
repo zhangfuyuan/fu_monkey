@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>放大镜</title>
+<style>
+	*{
+		margin:0;
+		padding:0;
+	}
+	.box{
+		width:350px;
+		height: 350px;
+		border:1px solid #000;
+		background: url(img/xiaotu.jpg) 0 0 no-repeat;
+
+
+		position: relative;
+		left:100px;
+		top:100px;
+	}
+
+	span{
+		width:100px;
+		height: 100px;
+		background: orange;
+		opacity: 0.5;
+		position: absolute;
+		cursor: move;
+		display: none;
+	}
+
+	.big{
+		top:0;
+		left:400px;
+		width:400px;
+		height: 400px;
+		display: none;
+		position: absolute;
+		border:1px solid #000;
+		background: url(img/datu.jpg) 0 0 no-repeat;
+	}
+</style>
+<script src="jquery-1.7.2.min.js"></script>
+<script>
+	$(function(){
+		$('.box').mousemove(function(e){
+			var l = e.pageX - $('.box').offset().left - 50;
+			var t = e.pageY - $('.box').offset().top - 50;
+
+			var w = $('.box').width() - $('span').width();
+			var h = $('.box').height() - $('span').height();
+
+			if( l <= 0 ){
+				l = 0;
+			}
+
+			if( l >= w ){
+				l = w;
+			}
+
+			if( t <= 0 ){
+				t = 0;
+			}
+
+			if( t >= h ){
+				t = h;
+			}
+
+			$('span').css({'left':l,'top':t});
+
+			// 让右侧大图动起来（下面是粗略的放大算法）
+
+			var x = -(l*800)/350;
+			var y = -(t*800)/350;
+			$('.big').css({'backgroundPosition':x+'px '+ y +'px'});
+		});
+		$('.box').mouseover(function(){
+			$('span,.big').show();
+		}).mouseout(function(){
+			$('span,.big').hide();
+		});
+
+	});
+</script>
+</head>
+<body>
+    <div class="box">
+    	<span></span>
+    	<div class="big"></div>
+    </div>
+</body>
+</html>

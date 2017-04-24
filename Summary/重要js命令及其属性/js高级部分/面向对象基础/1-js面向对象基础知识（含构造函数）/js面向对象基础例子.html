@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>面向对象</title>
+</head>
+<body>
+    <script>
+        /*  1、字面量创建方式创建对象（最常用） —— var 对象名={属性：属性值}; 【注意：此方法是创建对象，需要与构造函数 “function Object(name){this.name = name;}”区分】*/
+        var cc = {              //类似数组 var arr = [0,1,2,3];
+            name: 'afhuiag',
+            age: '18',
+            sex: '男'
+        };
+        console.log(cc);
+        console.log(cc.age);
+        console.log(cc['na'+'me']);
+        console.log(cc['sex']);
+        console.log(typeof cc);
+        console.log('---------------------- 以上：字面量创建方式（属性名无特殊意义） -----------------------');
+
+        var obj = {
+            'aa@!': 'afhuiag',
+            'var': '18',
+            'function': '男'
+        };
+        console.log(obj['var']);
+        console.log(obj['aa@!']);
+        console.log('---------------------- 以上：字面量创建方式（属性名有特殊意义） -----------------------');
+
+
+        /*  2、new Object()创建方式创建对象 —— var 对象名=new Object； 对象名.属性名=属性值； */
+        var obje = new Object();		//new 是一种运算符，表示新创建一个对象，“Object（）”中的“O”必须是大写
+        obje.bb = 1;
+        obje.aa = 2;
+        obje.cc = 3;
+        obje['#$%^&*'] = '你好';		//特殊形式的key必须加上引号，检索属性的时候，必须加上方括号
+        console.log(obje);
+        console.log(obje.cc);
+        console.log(obje['#$%^&*']);		//特殊形式的key必须加上引号，检索属性的时候，必须加上方括号
+        console.log('---------------------- 以上：new Object()创建方式 -----------------------------------');
+
+
+        /* 3、面向对象属性的方法的创建与调用 —— 函数名/属性名: function(){ 方法体 }*/
+        var xiaoming = {
+            name: '小明',
+            age: 18,
+            sex: '男',
+            play: 'LOL',
+            hobby: '读书',
+            grow: function () {
+                this.age++;
+            },                              //无论属性还是属性方法，后面都要用“,”隔开！！！
+            changSex: function () {
+                if(this.sex == '男' ){
+                    this.sex = '女';
+                }else {
+                    this.sex = '男';
+                }
+            }
+        };
+        console.log(xiaoming);
+        console.log(xiaoming.age);
+        console.log(xiaoming.hobby);
+        console.log(xiaoming['play']);
+        xiaoming.grow();
+        xiaoming.changSex();
+        console.log(xiaoming);
+        console.log(xiaoming.sex);
+        console.log('---------------------- 以上：面向对象属性的方法的创建与调用 ---------------------------');
+
+
+        /* 4、默认和强制调用this指代对象，并用call、apply强制指代对象，理解他们的区别【函数里面的this到底是谁，在函数定义的时候并不知道，要看函数如何被调用】 */
+        //默认this指代对象
+        function fun() {
+            alert('默认this指代对象: ' + this);		//直接用()调用函数，函数里面的this指的是window对象
+        }
+        fun();
+
+        //元素点击事件this指代对象
+        function fun1(){
+            alert('元素点击事件this指代对象: ' + this);		// 函数绑定给了一个事件，那么事件发生的时候函数将执行，this就是触发事件的那个HTML对象
+        }
+        var oDiv = document.createElement('div');
+        oDiv.style.cssText = 'width:100px;height:100px;background:red;';
+        oDiv.innerHTML = '点我';
+        document.body.appendChild(oDiv);
+        oDiv.onclick = fun1;
+
+        //定时器this指代对象
+        function fun2(){
+            alert('定时器this指代对象: ' + this);		// 用定时器来调用函数，函数里面的this是window
+        }
+        setInterval(fun2,10000);       //10秒后显示
+
+        //创建对象this指代对象
+        function fun3() {
+            alert('创建对象this指代对象的名字: ' + this.name);		// 创建一个对象xiaohong，将这个对象的haha属性，设置为刚才的fun函数。那么用对象的方法来调用的时候，函数里面的this是这个对象
+            alert('创建对象this指代对象: ' + this);
+        }
+        var xiaohong = {
+            name: '小红',
+            age: 16,
+            sex: '女',
+            haha: fun3
+        };
+        xiaohong.haha();
+
+		// 我们调用一个函数的时候，也可以通过apply、call来调用这个函数。此时能够人工设置函数里面的this是谁;而他们的区别就是后面的参数的语法
+        //利用apply强制this指代对象
+        function fun4(a,b,c) {
+            alert('利用apply强制this指代对象： ' + this.name + '很' + (a+b+c));
+        }
+        fun4.apply(xiaohong,[1,2,3]);       //参数列表必须是数组，一个数也要放进数组里！
+
+        //利用call强制this指代对象
+        function fun5(a,b,c) {
+            alert('利用call强制this指代对象： ' + this.name + '也很' + (a+b+c));
+        }
+        fun5.call(xiaoming,1,2,3);          //参数列表只能逗号隔开！
+
+
+        /*  5、利用this封装方法（工厂模式-->构造函数） 【工厂：无法识别创建对象的类型】*/
+        //工厂模式（不常用）
+        function createPerson(name,age,sex) {
+            var person = new Object();
+                person.name = name;
+                person.age = age;
+                person.sex = sex;
+            return person;      //不返回，无结果
+        }
+        var person1 = createPerson('person1-name',16,'女');
+        console.log(person1);
+        console.log('---------------------- 以上：工厂模式创建对象 ----------------------------------------');
+
+        //构造函数（函数名首字母要大写）
+        function CreatePerson(name,age,sex) {
+            this.name = name;
+            this.age = age;
+            if(this.age >= 18){
+                this.status = '已成年';        //固定参数
+            }else {
+                this.status = '未成年';
+            }
+            this.sex = sex;
+            this.addr = 'Guangzhou';        //固定参数
+        }
+        var person2 = new CreatePerson('person2-name',18,'男');      //实例化类，new的作用：new多少次，里面的语句就执行多少次，并且返回一个对象（包含对象的属性和方法）
+        console.log(person2);       //固定参数不需要传参，也会打印出来！
+        console.log('---------------------- 以上：构造函数创建对象 ----------------------------------------');
+
+
+
+    </script>
+</body>
+
+</html>

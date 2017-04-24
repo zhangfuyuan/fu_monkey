@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        div {
+            width: 64px;
+            height: 127px;
+            background: url(run.png) 0 -256px no-repeat;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <p style="width: 564px;height: 627px;border-right: 5px solid red;border-bottom: 5px solid red; "></p>
+</body>
+    <script>
+        /*//一般方法
+        var oDiv = document.getElementsByTagName('div')[0];
+        var foot = 1;
+        var nowleft = 0;
+        setInterval(function () {
+            nowleft+=5;
+            foot++;
+            if(foot > 7){
+                foot = 1;
+            }else {
+                oDiv.style.left = nowleft + 'px';
+                oDiv.style.backgroundPositionX = -foot*64 + 'px';
+            }
+
+        },100);
+        */
+
+        /*封装方法*/
+        function Run(left,top) {
+            this.left = left;
+            this.top = top;
+            this.dom = document.createElement('div');
+            document.body.appendChild(this.dom);
+            this.dom.style.top = this.top + 'px';
+            this.dom.style.left = this.left + 'px';
+            var self = this;        //备份this
+            this.walk = function () {
+                self.foot = 0;
+                self.timer = setInterval(function () {
+                    self.foot++;
+                    self.left++;
+                    if(self.foot > 7){
+                        self.foot = 0;
+                    }
+                    self.dom.style.left = self.left + 'px';
+                    self.dom.style.backgroundPositionX = - self.foot*64 + 'px';
+                    if(self.left > 500){
+                        self.stop();
+                    }
+                },100);
+            };
+            this.stop = function () {
+                clearInterval(self.timer);
+                document.body.removeChild(self.dom);
+            };
+            this.walk();
+        }
+
+        new Run(100,100);       //最开始先生成一个
+        setInterval(function () {
+            new Run(Math.random()*500,Math.random()*500);       //每一秒后生成一个
+        },1000);
+
+
+    </script>
+</html>

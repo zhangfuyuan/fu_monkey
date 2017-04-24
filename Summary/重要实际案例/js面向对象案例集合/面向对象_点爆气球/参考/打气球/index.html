@@ -1,0 +1,122 @@
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title></title>
+		<style type="text/css">
+			*{padding: 0;margin: 0;text-decoration: none;color: black;}
+			.ballon{width: 88px;height: 119px;
+			background: url(img/ballon.png)no-repeat;
+			position: absolute;left: 100px;top: 10px;
+			}
+			.fenshu,.shijian{font-size: 30px;font-family: "微软雅黑";font-weight: bold;}
+			.gameover{background-size: 40%;background:url(img/over.jpg)no-repeat;
+			  width: 700px;height: 166px;position: absolute;
+			  top: 200px;left: 350px;display: none;}
+			#kaishi{width: 200px;height:200px;position: absolute; background-color: #6496F5;font-family: "微软雅黑";font-weight: bolder;font-size: 30px;line-height: 200px;text-align: center;border-radius: 50%;
+			top: 200px;left: 550px;}
+			#chongxin{width: 150px;height:150px; background-color:#B2E0FE;font-family: "微软雅黑";font-weight: bolder;font-size: 30px;line-height: 150px;text-align: center;border-radius: 50%;
+			margin-top: 280px;margin-left: 575px;display: none;}
+		</style>
+		
+	</head>
+	<body style="background: url(img/bg.jpg)no-repeat;width: 100%;height: 100%;background-size: 100%;">
+		<p class="shijian">时间:50</p>
+		<p class="fenshu">分数:0</p>
+		<audio style="display: none;"   src="b.wav" ></audio>
+		<audio style="display: none;" id="guan" autoplay="autoplay" controls="controls" src="FPS Allstars-Tetris Genesis Main Theme (From Tetris)(A500 Mix).mp3"></audio>
+		<audio style="display: none;" id="over" src="铃声-超级玛丽1开始.mp3"></audio>
+		<div id="kaishi" onclick="timer1">
+			开始游戏
+		</div>
+			<a id="chongxin" href="#">重新开始</a>
+		<script>
+			var fen=0;
+			var yin=document.getElementsByTagName("audio")[0];
+			var sce = document.getElementsByClassName("fenshu")[0];
+			var over=document.getElementById("over");
+			var guan=document.getElementById("guan");
+			console.log(guan)
+			var oDiv=document.createElement("div");
+				oDiv.className="gameover";
+				document.body.appendChild(oDiv);
+			var chongxin=document.getElementById("chongxin");
+			var kaishi=document.getElementById("kaishi");
+			kaishi.onclick=function(){
+				kaishi.style.display="none";
+				kai();
+			}
+			console.log(chongxin)
+			console.log(kaishi)
+		function kai(){
+			function Ballon(){
+				this.top=500;
+				//位移
+				this.left=Math.random()*900+200;
+				//时间
+				this.timer=null;
+				//初始值
+				this.init();
+				//分数
+				this.secer=parseInt(Math.random()*7+1);		//bug:这只能获取1~7的数值，8号气球无法出现！
+				//爆
+				this.bao()
+				// 飞
+				this.fly();
+			}
+			Ballon.prototype.init=function(){	
+				this.dom=document.createElement("div");
+				this.dom.className="ballon";
+				document.body.appendChild(this.dom);
+				this.dom.style.left=this.left+"px";
+				this.dom.style.top=this.top+"px";
+			}
+			Ballon.prototype.fly=function(){
+				var x=-(this.secer-1)% 4 * 94;
+				var y=-parseInt((this.secer-1) / 4) * 118;
+				this.dom.style.backgroundPosition=x+"px "+y+"px";
+				var self=this
+			this.timer=setInterval(function(){
+					self.top-=(self.secer/3)*2
+					self.dom.style.top=self.top+"px";
+					if(self.top<=60){
+					clearInterval(self.timer);
+					document.body.removeChild(self.dom);
+					}	
+				},10)
+			}
+			Ballon.prototype.bao=function(){
+				var cun=this;
+				this.dom.onclick=function(){	
+					clearInterval(cun.timer);
+					document.body.removeChild(cun.dom);
+					yin.load()
+					yin.play()
+					fen+=cun.secer
+					sce.innerHTML="分数:"+fen;
+				}	
+			}
+			var time = document.getElementsByClassName("shijian")[0];
+			var t=50;
+			var shijian=0;
+			var timer1=setInterval(chuangjian,500)
+			function chuangjian(){
+					shijian++
+					if(shijian%2==0){
+						t--
+					time.innerHTML="时间:"+t;
+					}
+					if(t==0){
+						clearInterval(timer1);
+						oDiv.style.display="block";
+						chongxin.style.display="block";
+						guan.remove();
+						over.load();
+						over.play();
+					}
+					new Ballon();
+				}
+			
+		}
+		</script>
+	</body>
+</html>

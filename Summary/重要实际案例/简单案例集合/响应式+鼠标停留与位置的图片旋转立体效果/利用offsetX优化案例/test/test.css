@@ -1,0 +1,30 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+}
+div {
+    width: 400px;
+    margin: 100px auto;
+    transform-style: preserve-3d;   /* 父类一定要给 */
+    perspective: 1000px;
+}
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform .32s ease,filter .32s ease,box-shadow .32s ease;
+    transform: rotateX(0deg) scale(1);
+}
+img:hover {
+    box-shadow: 0 15px 30px rgba(0,0,0,.1);
+    transition: transform .24s ease,filter .24s ease,box-shadow .24s ease;
+}
+div p {
+    text-align: center;
+    margin-top: 20px;
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Balloon</title>
+    <style>
+        .balloon {
+            width: 96px;
+            height: 120px;
+            background: url(ballon.png) no-repeat;
+            position: absolute;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+</body>
+<script>
+    function Balloon() {
+        this.top = 500;
+        this.left = Math.random()*1200;
+        this.score = Math.floor(Math.random()*8)+1;
+        this.init();
+        this.fly();
+        this.getScore();
+    }
+    Balloon.prototype.init = function () {
+        this.dom = document.createElement('div');
+        this.dom.className = 'balloon';
+        document.body.appendChild(this.dom);
+        this.dom.style.top = this.top + 'px';
+        this.dom.style.left = this.left + 'px';
+        this.x = -(this.score-1)%4*96;
+        this.y = -Math.floor((this.score-1)/4)*120;
+        this.dom.style.backgroundPosition = this.x + 'px ' + this.y + 'px';
+    };
+    Balloon.prototype.fly = function () {
+        var self = this;        //用到定时器，下意识要备份this
+        this.timer = setInterval(function () {
+            self.top -= self.score;
+            self.dom.style.top = self.top + 'px';
+            if(self.top <= 0){
+                document.body.removeChild(self.dom);
+            }
+        },30);
+    };
+    var sum = 0;
+    var oSpan = document.createElement('span');
+    oSpan.innerHTML = '目前得分：' + sum;
+    document.body.appendChild(oSpan);
+
+    Balloon.prototype.getScore = function () {
+        var self = this;//用到事件，下意识要备份this
+        this.dom.onclick = function () {
+			clearInterval(self.timer);
+            sum += self.score;
+            oSpan.innerHTML = '目前得分：' + sum;
+            document.body.removeChild(self.dom);
+        }
+    };
+
+    new Balloon();
+    new Balloon();
+    new Balloon();
+    new Balloon();
+    new Balloon();
+    new Balloon();
+    new Balloon();
+    new Balloon();
+    new Balloon();
+    new Balloon();
+
+</script>
+</html>

@@ -1,0 +1,155 @@
+@charset "UTF-8";
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.cantainer {
+    width: 85%;
+    height: 2000px;
+    margin: 21vh auto 0;
+    position: relative;
+    transition: margin-top .5s ease,width .5s ease;     /*设备大小响应时，动态切换效果*/
+
+}
+@media screen and (min-width:1200px){
+    .cantainer {
+        margin: 180px auto 0;
+    }
+}
+@media screen and (min-width: 960px) and (max-width: 1199px) {
+    .cantainer {
+        margin: 160px auto 0;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 959px) {
+    .cantainer {
+        margin: 140px auto 0;
+    }
+}
+@media only screen and (min-width: 480px) and (max-width: 767px){
+    .cantainer {
+        margin: 120px auto 0;
+    }
+}
+@media only screen and (max-width: 479px) {
+    .cantainer {
+        margin: 100px auto 0;
+    }
+}
+
+.box {
+    width: 100%;
+    margin-bottom: 5vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;     /*水平内容排列方式：等距排列，首尾贴边*/
+    box-sizing: border-box;     /*盒模型设置的宽高作为边框的宽高，若有padding，内容的宽高会小于盒模型设置的宽高（通常与display: flex;布局同时使用）*/
+}
+@media screen and (min-width:1406px){
+    .box {
+        height: 141px;
+    }
+}
+@media screen and (min-width: 1010px) and (max-width: 1405px) {
+    .box {
+        height: 130px;
+    }
+}
+@media screen and (min-width: 949px) and (max-width: 1009px) {
+    .box {
+        height: 116px;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 948px){
+    .box {
+        height: 105px;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .box {
+        height: 108px;
+    }
+}
+
+.box-main {
+    display: inline-block;
+    width: 16.5%;
+    height: auto;
+    flex: 0 0 auto;     /*flex模式下，元素放大、缩小以及剩余空间属性的初始化*/
+    cursor: pointer;
+    transform-style: preserve-3d;       /*3D模式*/
+    perspective: 1000px;        /*3D模式下的视距（景深），常与transform-style: preserve-3d;同时使用*/
+}
+
+.link {
+    display: block;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform .1s ease;
+    transform: rotateX(0deg)  scale(1);
+    padding-bottom: 55.4%;      /*从行内元素转换成块状元素后，需要设定宽高才能显示完整的盒子里的内容；如果不设置宽高，默认宽度继承父类的全部宽度，而且高度等于其宽度*/
+}
+.link>img {
+    width: 90%;
+    max-height: 90%;
+    margin-left: 5%;
+    box-shadow: 0 2px 4px transparent;
+    border-radius: 9px;
+    transition: transform .32s ease,-webkit-filter .32s ease,box-shadow .32s ease;
+    position: absolute;
+}
+.box-main .link img:hover {
+    box-shadow: 0 15px 30px rgba(0,0,0,.1);
+    transition: transform .24s ease,-webkit-filter .24s ease,box-shadow .24s ease;
+}
+
+
+.box-main>p {
+    height: 18px;
+    line-height: 18px;
+    font-size: 13px;
+    text-align: center;
+    white-space: nowrap;        /*剩余空间：不换行*/
+    overflow: hidden;
+    width: 150%;
+    margin-left: -25%;
+    color: #5a5a5a;
+    font-family: 'Microsoft yahei','微软雅黑',Tahoma,Verdana,Arial,sans-serif;
+}
+.box-main p:hover {
+    text-decoration: underline;
+}
+
+/*display: flex;与常规盒子模型垂直居中实现的区别*/
+/*display: flex;是父类控制子类居中*/
+.div1 {
+    display: flex;
+    align-items: center;
+}
+
+/*常规盒子模型是子类自身居中*/
+.div2 {
+    position: relative;
+}
+.div2 img {
+    vertical-align: middle;
+}
+.div2 p {
+    display: inline-block;
+    vertical-align: middle;
+}
+/*以上*/
+
+.div3 {
+    width: 100%;
+    margin: 50px auto 100px;
+    text-align: center;
+}
+.div3>img {
+    width: 200px;
+    height: auto;
+    margin: 0 50px;
+}
+

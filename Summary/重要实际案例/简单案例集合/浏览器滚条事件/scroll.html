@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scroll</title>
+    <script src="scroll.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 3000px;
+        }
+        #txt {
+            position: fixed;
+            z-index: 999;
+            top: 50%;
+            margin-top: -150px;
+            left: 0;
+        }
+        #box {
+            margin: 70px;
+            position: relative;
+        }
+        #box div {
+            border: 20px solid yellow;
+            margin: 100px;
+            padding: 50px;
+            width: 400px;
+            height: 300px;
+            background: red;
+            position: absolute;
+        }
+        #sec {
+            position: fixed;
+            right: 50px;
+            bottom: 50px;
+            display: none;
+            width: 100px;
+            height: 100px;
+            background: green;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+            line-height: 50px;
+        }
+        p {
+            width: 100px;
+            height: 200px;
+            background: blue;
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <textarea id="txt" cols="22" rows="20"></textarea>
+    <div id="box"><div></div></div>
+    <div id="sec">回到顶部</div>
+    <p>一旦存在滚条事件时，滚动条滚到最顶部也无法到达document的最顶部，因为滚条框的顶部固块占用了最顶部的一些空间(此块top:0;)</p>
+</body>
+</html>

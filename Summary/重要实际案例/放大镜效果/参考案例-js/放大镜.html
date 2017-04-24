@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		*{margin: 0;padding: 0;}
+		div{position: absolute;}
+		#small{width: 170px;height: 170px;background: url(img/2.jpg) no-repeat;}
+		#big{width: 100px;height: 100px;background: url(img/1.jpg) no-repeat;left: 180px;display: none;}
+		#fdj{width:50px;height:50px;background: plum;opacity:0.3;position: absolute;left: 0;top: 0;display: none;}
+	</style>
+	<body>
+		<div id="small">
+			<div id="fdj"></div>
+		</div>
+		<div id="big"></div>
+	</body>
+	<script>
+		var small=document.getElementById("small");
+		var big=document.getElementById("big");
+		var fdj=document.getElementById("fdj");
+		//划入出现
+		small.onmouseover=function() {
+			big.style.display="block";
+			fdj.style.display="block"
+		}
+		//划出消失
+		small.onmouseout=function() {
+			big.style.display="";
+			fdj.style.display=""
+		}
+		/*移动事件
+		 * 鼠标移动 放大镜跟着移动，鼠标在放大镜中心 X Y是放大镜相对于小图的left top
+		 */
+		small.onmousemove=function() {
+			var e=event||arguments[0];
+			//console.log(e.clientX);
+			//   相对于当前屏幕的坐标-small的左边距 -本身宽度的一半
+			var x = e.clientX-small.offsetLeft-fdj.offsetWidth/2;
+			var y = e.clientY-small.offsetTop-fdj.offsetHeight/2;
+			//边界问题
+			if(x<=0){
+				fdj.style.left=0+"px";
+			}else if(x>=(small.offsetWidth-fdj.offsetWidth)){
+				fdj.style.left=small.offsetWidth-fdj.offsetWidth+"px"
+			}else{
+				fdj.style.left=x+"px";
+			}
+			if(y<=0){
+				fdj.style.top=0+"px";
+			}else if(y>=(small.offsetHeight-fdj.offsetHeight)){
+				fdj.style.top=small.offsetHeight-fdj.offsetHeight+"px"
+			}else{
+				fdj.style.top=y+"px";
+			}
+			//移动  得到移动距离比例
+			var wk=400/170;
+			var hk=400/170;
+			
+	
+			big.style.backgroundPosition=wk*(-fdj.offsetLeft) + "px"+" "+hk*(-fdj.offsetTop)+"px"
+	
+		}
+	</script>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ball</title>
+</head>
+<body>
+<script>
+    var oDiv = document.createElement('div');
+    oDiv.style.cssText = 'width: 600px; height: 400px; border: 2px solid #000; margin: 100px auto 0; position: relative;';
+    document.body.appendChild(oDiv);
+
+    function Ball(color,vX,vY) {
+        this.color = color;
+        this.ball = document.createElement('div');
+        this.ball.style.cssText = 'border-radius: 50%; width: 30px; height: 30px; background-color: ' + this.color + '; position: absolute;';
+        oDiv.appendChild(this.ball);
+        this.vX = vX;
+        this.vY = vY;
+        this.init();
+        this.run();
+    };
+
+    Ball.prototype.init = function () {
+        this.top = Math.floor(Math.random()*(oDiv.offsetHeight-this.ball.offsetHeight));
+        this.left = Math.floor(Math.random()*(oDiv.offsetWidth-this.ball.offsetWidth));
+        this.ball.style.top = this.top + 'px';
+        this.ball.style.left = this.left + 'px';
+    };
+
+    Ball.prototype.run = function () {
+        var self = this;
+        this.timer = setInterval(function () {
+             self.left = self.vX + self.ball.offsetLeft;
+             self.top = self.vY + self.ball.offsetTop;
+             if(self.left <= 0){
+                 self.vX*= -1;
+                 self.left = 0;
+             } else if(self.left >= (oDiv.offsetWidth-self.ball.offsetWidth)){
+                 self.vX*= -1 ;
+                 self.left = oDiv.offsetWidth-self.ball.offsetWidth;
+             }
+             if(self.top <= 0){
+                 self.vY*= -1 ;
+                 self.top = 0;
+             } else if(self.top >= (oDiv.offsetHeight-self.ball.offsetHeight)){
+                 self.vY*= -1 ;
+                 self.top = oDiv.offsetHeight-self.ball.offsetHeight;
+             }
+             self.ball.style.left = self.left + 'px';
+             self.ball.style.top = self.top + 'px';
+        },30);
+    };
+
+    new Ball('red',30,20);
+    new Ball('blue',15,10);
+    new Ball('green',12,8);
+    new Ball('yellow',9,6);
+    new Ball('purple',6,4);
+
+</script>
+</body>
+</html>w
