@@ -19,11 +19,13 @@ window.onload = function() {
 
 	//事件流中，默认为事件冒泡，即先执行最具体的元素的事件，然后再向上逐级传播。
 
-	//JS中，对象的层次关系：（最高级：浏览器对象）
+	//通常情况下，一个URL的格式是【协议//主机：端口/路径名称？搜索条件】
+
+	//JS中，对象的层次关系：（最高级：浏览器对象browser ; navigator为导航对象）
 	browser{window[frame,document(Document,Element,Attribute,Event),location,history],screen,navigator}
 
 /************************		二、JS可直接调用的属性		************************/
-//BOM对象的属性（全局变量和document均可当作window对象的属性）
+//BOM对象的属性（全局变量和document均可当作window对象的属性;document：最顶层的节点，所有的其他节点都是附属于它的）
 	window.innerWidth;		//window对象的内部宽度,包括滚动条的宽度（随缩放窗口变化）
 	window.innerHeight;		//window对象的内部高度，即浏览器中除去顶部浏览器自身的导航栏和可能底部检查框的高度后剩余显示内容的高度（随缩放窗口变化）
 	window.location.hostname;		//返回web主机的域名
@@ -31,6 +33,7 @@ window.onload = function() {
 	window.location.port;		//返回web主机的端口
 	window.location.protocal;		//返回web所使用的协议（如http://或https://）
 	window.location.href;		//返回当前页面的URL
+	window.event;		//获取事件对象
 	
 	//疑点：screen是不是window的子对象？？！
 	screen.availWidth;		//可用屏幕的宽度，一台电脑固定一个值（不随窗口变化）
@@ -46,14 +49,41 @@ window.onload = function() {
 	document.*.style.property = propertyValue;		//改变HTML元素的css样式（ps：JS中CSS样式的property均采取小驼峰命名，不识别“-”）
 	document.*.childNodes;		//访问子节点,形成数组（ps：1、子节点不包含孙节点及以后；2、空格也当作子节点，所以按规范代码写法，[0]为空格，[1]才为子元素；3、不换行连写html代码，那么[0]为子元素）
 	document.*.parentNode;		//访问父节点（ps：唯一）
-	document.*.offsetHeight;		//*元素可见范围的不包含滚动条的高度
-	document.*.scrollHeight;		//*元素可见范围的包含滚动条的高度
+	document.*.offsetHeight;		//*元素可见范围的包含滚动条的高度【可见范围包括：正文+padding+内部滚动条+边框宽度】
+	document.*.offsetTop;		//*元素可见范围的顶部与其带position父类顶部的距离
+	document.*.scrollHeight;		//*元素正文全部区域的高度（包括被卷走的内容，实际会超出正文可见范围的高度）
 	document.documentElement.clientHeight;		//当前客户端浏览器的页面高度，即浏览器中除去顶部浏览器自身的导航栏和可能底部检查框的高度后剩余显示内容的高度（随缩放窗口变化）
 	document.documentElement.clientWidth;		//当前客户端浏览器的页面宽度，不包括滚动条的宽度（随缩放窗口变化）
 	document.documentElement.scrollTop;		//滚动条可见的顶部与整个页面最顶部的距离（ps：滚动条相当于当前页面的缩影）
-	document.*.offsetTop;		//*元素可见范围的顶部与整个页面最顶部的距离
+	event.srcElement||event.target.nodeName=="BUTTON";		//获取触发事件的对象的子节点【注意：节点标签名需要大写】
 
+	//javascript中制作滚动代码的常用属性总结如下：【详图见同文件目录下的《位置知多少.jpg》】
+	*.style.top;		//在有position情况下，*元素上（外）边框与其父类内容区域顶部的距离【ps；若*元素有外边距，则需减去外边距】
+	*.style.left;		//左边同理
+	/*以上作为style的属性，返回的是带单位'px'的【字符串】！！*/
 
+	body.clientTop;		//body上（内）边框与浏览器（除去顶部菜单区域）内容区域的顶部的距离
+	body.clientLeft;	//左边同理
+
+	/*clientTop、clientLeft是最坑的！*/
+	*.clientTop;		//可以理解为*元素的上边框宽度（实际上是返回*元素的offsetTop属性值和到当前*元素内容区域顶边的真实值之间的距离）
+	*.clientLeft;		//左边同理
+
+	*.scrollTop;		//在有滚动条情况下，滚动条顶部与整个滚动区域顶部的距离
+	*.scrollLeft;		//左边同理
+
+	*.clientHeight;		//*元素可见范围除去边框宽度和内部滚动条宽度，只剩正文和padding的高度
+	*.clientWidth;		//*元素可见范围除去边框宽度和内部滚动条宽度，只剩正文和padding的宽度
+
+	/*以下当【父子类】均有【position定位】得到的是父子相距值；若子类有定位，上（几）层均无定位时，得到的是与浏览器边框的距离！*/
+	*.offsetTop;		//当前*元素上（外）边框（即可见区域的顶部）与其（不止一级）上级带position属性层的上（内）边框的距离
+	*.offsetLeft;		//左边同理
+	/*以上简单总结：【“style”返回字符串；
+					  “client”只算内容+内距；
+					  “scroll”要算卷走部分，计算看缩影；
+					  “offset”全算可见范围（4样）；
+					  “上下左右”要position定位。】*/
+	
 //数组对象的属性
 	arr[i].index = i;		//用于把每次循环加上序列，并可以在当次循环中调用其序列值，达到获取该数组元素的下标 ——— 调用“this.index”
 
@@ -61,6 +91,9 @@ window.onload = function() {
 //事件对象的属性
 	event.type		//获取事件的类型
 	event.target		//获取事件的目标
+	event.srcElement		//获取触发事件的目标
+	event.offsetX		//获取相对于触发事件的元素左上角位置的横坐标
+	event.clientY		//获取相对于浏览器显示区域的纵坐标
 
 
 //字符串对象
@@ -77,6 +110,8 @@ window.onload = function() {
 	clearInterval(函数名);		//清除定时器
 	setTimeout(函数名,毫秒数);		//暂停指定的毫秒数之后执行指定的代码，只执行一次（即延时执行）
 	clearTimeout(函数名);		//清除暂停
+	eval(数值的运算表达式);		//将参数内运算表达式的执行结果返回
+	console.log('字符串'/变量);		//在控制台打印出参数的内容
 
 //Math对象的带参方法
 	parseInt(*)	;	//强制转换成整型数值
@@ -86,13 +121,15 @@ window.onload = function() {
 	Math.max(num1,num2,...,numN);		//返回最大值
 	Math.min(num1,num2,...,numN);		//返回最小值
 	Math.abs(num);		//返回绝对值
-	Math.min.apply(null,arr);		////返回指定数组中的一个最小值
+	Math.min.apply(null,arr);		//返回指定数组中的一个最小值
+	getChildElement(parent,'child');		//获取名为parent的子节点child
 	
 	
 //DOM对象的带参方法（即调用方法时，“.”前必须为“document”！！！）
 	document.getElementsByClassName('*')[**]	;		//获取*类名元素
 	document.getElementsByTagName('*')[**];		//获取*标签名元素
 	document.getElementById('*');		//获取*id名元素
+	document.querySelectorAll("*")		//获取所有*标签名的元素【注意：若为id名，最后需要“[0]”】
 
 	document.createElement('*');		//创建*名标签元素
 	document.createTextNode('*');		//创建文本节点，文本内容为*
@@ -109,7 +146,7 @@ window.onload = function() {
 	document.*.style.cssText = 'border-radius:30%;width:100px;height:100px;';		//组合改写属性
 	document.*.insertBefore(newVar,Var);		//在某个元素的前面插入一个新节点，在这个方法中，包含了两个参数，第一个参数是要插入的节点，第二个参数是参考节点，也就是所谓的在哪个节点前插入（ps：此两节点属同层节点）
 	document.*.removeChild(*.childNodes[1]);		//移除*的第二个子节点，结合childNodes属性理解
-
+	
 
 
 //BOM对象的带参方法（即调用方法时，“.”前必须为“window”！！！）	
@@ -148,7 +185,8 @@ window.onload = function() {
 
 /*2、不带参的方法*/
 	*.onclick();		//点击事件
-	*.onmouseover();		//鼠标停留事件
+	*.onmousemove();		//鼠标移动事件，只要鼠标在*元素上，函数方法就一直被调用
+	*.onmouseover();		//鼠标停留事件，函数方法只调用一次
 	*.onmouseout();		//鼠标离开事件（包含指定元素及其子元素）
 	*.onmouseleave();		//鼠标离开事件（只含指定元素）
 	*.onmouseenter();		//鼠标穿过事件（不仅要停留，而且还要离开）

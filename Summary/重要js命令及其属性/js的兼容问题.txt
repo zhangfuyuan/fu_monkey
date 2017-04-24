@@ -22,3 +22,15 @@ var oBtn = document.getElementById('btn');
 var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;;
 var pageHeight = document.documentElement.clientHeight||document.body.clientHeight;
 var distance = scrollTop+pageHeight;
+
+问题四、在事件中，获取触发事件的目标元素对象
+var obj = event.srcElement||event.target;
+
+
+问题五、在事件中，获取事件对象并取消事件冒泡：
+var e = window.event||arguments[0];		//获取事件对象
+if(e.stopPropagation){
+	e.stopPropagation();
+}else{
+	e.cancelBubble = true;		//兼容IE8
+}
